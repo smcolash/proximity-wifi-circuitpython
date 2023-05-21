@@ -1,9 +1,16 @@
 Param (
     [string] $PORT = "COM5",
-    [string] $IMAGE = "adafruit-circuitpython-doit_esp32_devkit_v1-en_US-8.0.5.bin"
+    [string] $IMAGE = "adafruit-circuitpython-doit_esp32_devkit_v1-en_US-8.0.5.bin",
+    [switch] $DOWNLOAD = $false
 )
 
-#Set-PSDebug -Trace 1
+Set-PSDebug -Trace 0
+
+if ($download) {
+    wget -O $IMAGE https://downloads.circuitpython.org/bin/doit_esp32_devkit_v1/en_US/$IMAGE
+
+    wget -O adafruit_requests.py https://raw.githubusercontent.com/adafruit/Adafruit_CircuitPython_Requests/main/adafruit_requests.py
+}
 
 Write-Host ""
 Write-Host "info - erasing the contents of the ESP32 board"
